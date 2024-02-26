@@ -2,7 +2,7 @@ var leadProjectTable;
 
 var selectedData = undefined;
 const CLIENT_ID =
-  "626814190880-f6hp6ss2g2p2qbpsphtekvvva78iun6n.apps.googleusercontent.com";
+  "626814190880-mn7rgj6hc6i8c2p6gmat7ifbhoamgthq.apps.googleusercontent.com";
 
 const API_KEY = "AIzaSyCTuTBqZhTwb6ijh8sCou_cDe--NfrbSeM";
 
@@ -230,6 +230,7 @@ async function listUpcomingEvents() {
             'showDeleted': false,
             'singleEvents': true,
             'maxResults': 10,
+            alwaysIncludeEmail:true,
             'orderBy': 'startTime',
         };
         response = await gapi.client.calendar.events.list(request);
@@ -243,9 +244,10 @@ async function listUpcomingEvents() {
         document.getElementById('content').innerText = 'No events found.';
         return;
     }
+    console.log(events)
     // Flatten to string to display
     const output = events.reduce(
-        (str, event) => `${str}${event.summary} (${event.start.dateTime || event.start.date})\n`,
+        (str, event) => `${str}${event.summary} [startdate - ${event.start.dateTime || event.start.date}] [enddate -${event.end.dateTime || event.end.date}]  [attendees - ${event.attendees[0].email }]\n`,
         'Events:\n');
     document.getElementById('content').innerText = output;
 }
