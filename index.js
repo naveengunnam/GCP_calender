@@ -124,6 +124,7 @@ $(document).ready(function () {
     selectedData = data;
     console.log(data);
     $("#scheduleModal").modal("toggle");
+    $("#statusMessage").html("");
   });
 });
 
@@ -138,6 +139,8 @@ $('#appointmentBtn').click(function(){
     listUpcomingEvents();
 })
 $("#scheduleButton").click(function () {
+  $("#statusMessage").html("");
+
   let fromDate = $("#fromDateTime").val();
   let toDate = $("#toDateTime").val();
   console.log(selectedData);
